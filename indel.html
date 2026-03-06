@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tokyo → Zhengzhou</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+body{
+margin:0;
+padding:0;
+}
+#map{
+width:100%;
+height:100vh;
+}
+</style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([35,120],4);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+maxZoom:18
+}).addTo(map);
+
+var tokyo=[35.6762,139.6503];
+var zhengzhou=[34.7466,113.6254];
+
+L.marker(tokyo).addTo(map).bindPopup("Tokyo").openPopup();
+L.marker(zhengzhou).addTo(map).bindPopup("Zhengzhou");
+
+var route = L.polyline([
+tokyo,
+[36,135],
+[35,128],
+[34,124],
+[34.5,120],
+zhengzhou
+],{
+color:'red',
+weight:4
+}).addTo(map);
+
+map.fitBounds(route.getBounds());
+
+</script>
+
+</body>
+</html>
